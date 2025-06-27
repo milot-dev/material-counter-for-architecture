@@ -1,7 +1,7 @@
-
-
 ## Usage
-- Install with `pip install -r requirements.txt` 
+
+- Install with `pip install -r requirements.txt`
+
 1. **Run the application:**
    ```bash
    python main.py
@@ -14,8 +14,20 @@
    - **Extract All Materials**: Shows all material codes, even those without a circle code.
 5. **Save Results**: Click "Save Results to Excel" to export the displayed results.
 
+## Dependencies
 
+Your system must have:
 
+- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
+- [Poppler](https://poppler.freedesktop.org/)
+
+### Linux
+
+```bash
+sudo apt update
+sudo apt install tesseract-ocr poppler-utils
+### MacOS
+brew install tesseract poppler
 ## How It Works
 
 - The app first tries to extract text natively from the PDF using [PyMuPDF](https://pymupdf.readthedocs.io/).
@@ -63,11 +75,11 @@
 
 ## Customization
 
-- **Add new material/circle code patterns:**  
+- **Add new material/circle code patterns:**
   Edit the regular expressions in `main.py` to support additional formats.
-- **Change default paths:**  
+- **Change default paths:**
   Modify the `resource_path` function or set `TESSERACT_PATH` and `POPPLER_PATH` directly.
-- **Change output format:**  
+- **Change output format:**
   Edit the `save_to_excel` function to customize the Excel output.
 
 ---
@@ -83,7 +95,7 @@
 
 ## License
 
-This project is licensed under the MIT License.  
+This project is licensed under the MIT License.
 You are free to use, modify, and distribute this code for personal or commercial use — just give proper credit.
 See included licenses for Poppler and Tesseract.
 See the [LICENSE](./LICENSE) file for full details.
@@ -91,3 +103,4 @@ See the [LICENSE](./LICENSE) file for full details.
 ---
 
 **Enjoy extracting your circle codes! If you have suggestions or improvements, feel free to contribute.**
+```
