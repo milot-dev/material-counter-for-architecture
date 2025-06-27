@@ -1,0 +1,22 @@
+# Ignore virtual environments
+venv/* linguist-vendored
+.env/* linguist-vendored
+.venv/* linguist-vendored
+
+# Ignore build artifacts
+build/* linguist-generated
+dist/* linguist-generated
+
+# Ignore common compiled extensions
+*.so linguist-generated
+*.dll linguist-generated
+*.pyd linguist-generated
+
+# Ignore package metadata
+*.egg-info/* linguist-generated
+.eggs/* linguist-generated
+
+# Ignore external/vendor libraries if any
+third_party/* linguist-vendored
+lib/* linguist-vendored
+external/* linguist-vendored
