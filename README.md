@@ -1,4 +1,4 @@
----
+
 
 ## Usage
 - Install with `pip install -r requirements.txt` 
@@ -14,7 +14,7 @@
    - **Extract All Materials**: Shows all material codes, even those without a circle code.
 5. **Save Results**: Click "Save Results to Excel" to export the displayed results.
 
----
+
 
 ## How It Works
 
