@@ -20,3 +20,7 @@ dist/* linguist-generated
 third_party/* linguist-vendored
 lib/* linguist-vendored
 external/* linguist-vendored
+
+# Ignore poppler and tesseract
+poppler/** linguist-vendored
+tesseract/** linguist-vendored
