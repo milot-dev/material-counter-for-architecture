@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PyInstaller build
+build/
+dist/
+*.spec
+
+# Excel/temporary files
+*.xlsx
+*.xls
+*.tmp
