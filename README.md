@@ -21,13 +21,16 @@ Your system must have:
 - [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
 - [Poppler](https://poppler.freedesktop.org/)
 
-### Linux
+## Linux
 
-```bash
+bash
 sudo apt update
 sudo apt install tesseract-ocr poppler-utils
-### MacOS
+
+## MacOS
+
 brew install tesseract poppler
+
 ## How It Works
 
 - The app first tries to extract text natively from the PDF using [PyMuPDF](https://pymupdf.readthedocs.io/).
