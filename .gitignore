@@ -20,3 +20,10 @@ dist/
 *.xlsx
 *.xls
 *.tmp
+
+# Ignore Poppler and Tesseract folders or files
+poppler/
+tesseract/
+*.exe
+*.dll
+*.bin

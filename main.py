@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.ttk as ttk 
 from tkinter import filedialog, messagebox
 import pandas as pd
 import pytesseract
@@ -521,54 +522,79 @@ def save_results():
 
 # === GUI Setup ===
 root = tk.Tk()
-root.title("Circle Code Material Extractor")
-root.geometry("800x600")
+root.title("PDF Material Extractor")
+root.geometry("1000x600")
+root.configure(bg="#f4f4f4")
+
+# Style
+style = ttk.Style()
+style.theme_use('clam')
+style.configure('TLabel', font=('Segoe UI', 11), background="#f4f4f4")
+style.configure('TButton', font=('Segoe UI', 11), padding=3, background="lightblue")
+style.configure('TEntry', font=('Segoe UI', 11))
+style.configure('TFrame', background="#f4f4f4")
+style.configure('TLabelframe', background="#f4f4f4", font=('Segoe UI', 12, 'bold'))
+
+# Main frame
+main_frame = ttk.Frame(root, padding="20 15 20 15")
+main_frame.grid(row=0, column=0, sticky="nsew")
+root.grid_rowconfigure(0, weight=1)
+root.grid_columnconfigure(0, weight=1)
 
 # Configure grid weights for resizing
 root.grid_rowconfigure(4, weight=1)
 root.grid_columnconfigure(1, weight=1)
 
 # PDF Selection
-tk.Label(root, text="Select PDF File:").grid(row=0, column=0, padx=5, pady=5, sticky='e')
-pdf_entry = tk.Entry(root, width=60)
+pdf_frame = ttk.LabelFrame(main_frame, text="PDF Selection", padding="10 10 10 10")
+pdf_frame.grid(row=0, column=0, sticky="ew", pady=10)
+pdf_frame.grid_columnconfigure(1, weight=1)
+ttk.Label(pdf_frame, text="Select PDF File:").grid(row=0, column=0, padx=5, pady=5, sticky='e')
+pdf_entry = ttk.Entry(pdf_frame, width=60)
 pdf_entry.grid(row=0, column=1, padx=5, pady=5, sticky='ew')
-tk.Button(root, text="Browse", command=browse_pdf).grid(row=0, column=2, padx=5, pady=5)
+ttk.Button(pdf_frame, text="Browse", command=browse_pdf).grid(row=0, column=2, padx=5, pady=5)
+
 
 # Circle Codes Input
-tk.Label(root, text="Enter Circle Codes (comma separated):").grid(row=1, column=0, padx=5, pady=5, sticky='e')
-circle_entry = tk.Entry(root, width=60)
-circle_entry.grid(row=1, column=1, padx=5, pady=5, sticky='ew')
+circle_frame = ttk.LabelFrame(main_frame, text="Circle Codes", padding="10 10 10 10")
+circle_frame.grid(row=1, column=0, sticky="ew", pady=10)
+circle_frame.grid_columnconfigure(1, weight=1)
+ttk.Label(circle_frame, text="Enter Circle Codes (comma separated):").grid(row=0, column=0, padx=5, pady=5, sticky='e')
+circle_entry = ttk.Entry(circle_frame, width=60)
+circle_entry.grid(row=0, column=1, padx=5, pady=5, sticky='ew')
 
 # Process Buttons
-button_frame = tk.Frame(root)
-button_frame.grid(row=2, column=0, columnspan=3, pady=20)
+button_frame = ttk.Frame(main_frame)
+button_frame.grid(row=2, column=0, pady=10, sticky="ew")
+button_frame.grid_columnconfigure((0, 1, 2), weight=1)
 
 # Extract buttons
-extract_material_btn = tk.Button(button_frame, text="Extract Material Codes", command=process_pdf, height=2, width=25)
-extract_material_btn.pack(side=tk.LEFT, padx=10)
-extract_all_codes_btn = tk.Button(button_frame, text="Extract ALL Circle Codes", command=process_all_codes, height=2, width=25)
-extract_all_codes_btn.pack(side=tk.LEFT, padx=10)
+extract_material_btn = ttk.Button(button_frame, text="Extract Material Codes", command=process_pdf)
+extract_material_btn.grid(row=0, column=0, padx=5, ipadx=5, ipady=3, sticky="ew")
+extract_all_codes_btn = ttk.Button(button_frame, text="Extract All Circle Codes", command=process_all_codes)
+extract_all_codes_btn.grid(row=0, column=1, padx=5, ipadx=5, ipady=3, sticky="ew")
+extract_all_materials_btn = ttk.Button(button_frame, text="Extract All Materials", command=process_all_materials)
+extract_all_materials_btn.grid(row=0, column=2, padx=5, ipadx=5, ipady=3, sticky="ew")
 
-extract_all_materials_btn = tk.Button(button_frame, text="Extract All Materials", command=process_all_materials, height=2, width=25)
-extract_all_materials_btn.pack(side=tk.LEFT, padx=10)
 
 # Results Text Area with Scrollbar
-results_frame = tk.Frame(root)
-results_frame.grid(row=3, column=0, columnspan=3, padx=10, pady=5, sticky='nsew')
+results_frame = ttk.LabelFrame(main_frame, text="Results", padding="10 10 10 10")
+results_frame.grid(row=3, column=0, padx=10, pady=5, sticky='ew')
 results_frame.grid_rowconfigure(0, weight=1)
 results_frame.grid_columnconfigure(0, weight=1)
 
-scrollbar = tk.Scrollbar(results_frame)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-results_text = tk.Text(results_frame, wrap=tk.WORD, yscrollcommand=scrollbar.set, state=tk.DISABLED)
-results_text.pack(expand=True, fill=tk.BOTH)
-
-scrollbar.config(command=results_text.yview)
+results_text = tk.Text(results_frame, wrap=tk.WORD, font=('Consolas', 11), bg="#f9f9f9", relief=tk.FLAT, borderwidth=2)
+results_text.grid(row=0, column=0, sticky="nsew")
+scrollbar = ttk.Scrollbar(results_frame, command=results_text.yview)
+scrollbar.grid(row=0, column=1, sticky='ns')
+results_text['yscrollcommand'] = scrollbar.set
 
 # Save Button (initially hidden)
-save_button = tk.Button(root, text="Save Results to Excel", command=save_results)
-save_button.grid(row=5, column=1, pady=10)
-save_button.grid_remove() 
+save_button = ttk.Button(main_frame, text="Save Results to Excel", command=save_results)
+save_button.grid(row=4, column=0, pady=(5,15), sticky='w', padx=10)
+save_button.grid_remove()
+
+main_frame.grid_rowconfigure(3, weight=1)
+main_frame.grid_columnconfigure(0, weight=1)
 
 root.mainloop()
